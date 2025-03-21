@@ -286,9 +286,9 @@ while True:
    elif selection == '3':
       name = input('name:\n')
       under_quest = (input('Which Quest is this under?\n'))
-      user = input('Who does this belong to? Leave blank for all.')
-      if user=='':
-         user = 'Shannon,Nathanael'
+      belongs_to = input('Who does this belong to? Leave blank for all.')
+      if belongs_to =='':
+         belongs_to = 'Shannon,Nathanael'
       AddJourney(name, under_quest, user)
 
 #  ≈☆≈ When the user chooses to add a new quest ≈☆≈  #
