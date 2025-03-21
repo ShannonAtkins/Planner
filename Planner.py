@@ -308,7 +308,7 @@ while True:
       belongs_to = input('Who does this belong to? Leave blank for all.')
       if belongs_to =='':
          belongs_to = 'Shannon,Nathanael'
-      AddJourney(name, under_quest, user)
+      AddJourney(name, under_quest, belongs_to)
 
 #  ≈☆≈ When the user chooses to add a new quest ≈☆≈  #
    elif selection == '4':
