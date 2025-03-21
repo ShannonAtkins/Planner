@@ -145,10 +145,10 @@ def FetchActivities():
                      row['physical_activity_required'], row['mental_capacity_required'], row['anxiety_level_evoked'], row['under_quest'], row['under_journey']))
 
 #  ≈☆≈ Adds a new Activity into the SQL database ≈☆≈  #
-def AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, under_quest, under_journey):
+def AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, under_quest, under_journey):
    cursor.execute('INSERT INTO Activities (name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, is_active, under_quest, under_journey) VALUES (\'' 
                   + name + '\', ' + hard_due_date_bool + ', \'' + due_date + '\', \'' + suggested_date + '\', ' + urgency + ', \'' + notes + '\', ' + physical_activity_required 
-                  + ', ' + mental_capacity_required + ', ' + anxiety_level_evoked + ',\'' + user+ '\', true, \'' + under_quest + '\', \'' + under_journey +'\')')
+                  + ', ' + mental_capacity_required + ', ' + anxiety_level_evoked + ',\'' + user + '\', true, \'' + under_quest + '\', \'' + under_journey +'\')')
    connection.commit()
 
 #  ≈☆≈ Class definition of the lowest level category for organizing repeating activities ≈☆≈  #
@@ -291,12 +291,14 @@ while True:
       anxiety_level_evoked = input('Anxiety level evoked from 1-10\n')
       under_quest = input('What quest is this under?\n')
       under_journey = input('What journey is this under?\n')
-      if user == 'Shannon':
+      who = input('Is this for just you?')
+      if who == 'no':
          AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes,
-                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, under_quest, under_journey)
-      elif user == 'Nathanael':
+                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, 'Shannon,Nathanael', under_quest, under_journey)
+      else:
          AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes,
-                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, under_quest, under_journey)
+                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, under_quest, under_journey)
+
 #  ≈☆≈ When the user chooses to add a repeating activity ≈☆≈  #
 
 #  ≈☆≈ When the user chooses to add a new journey ≈☆≈  #
@@ -331,5 +333,6 @@ while True:
       pass
    elif selection == '11':
       render()
+      
 #  ≈☆≈ Commits the changes in the SQL database ≈☆≈  #
    connection.commit()
