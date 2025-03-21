@@ -225,7 +225,7 @@ def render():
          if journey.under_quest == quest.name:
             print('  ' + journey.name)
             for activity in ActivitiesList:
-               if activity.under_journey == journey.name:
+               if activity.under_quest == quest.name and activity.under_journey == journey.name:
                   print('    ' + activity.name)
 
 #  ≈☆≈ Calculate frog.  What is the frog?  That's a good google search. ≈☆≈  #
