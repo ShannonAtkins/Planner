@@ -275,7 +275,11 @@ while True:
                      #physical_activity_required, mental_capacity_required, anxiety_level_evoked
       name = input('name:\n')
       hard_due_date_bool = input('Is there a hard due date? Input as bool.\n')
-      due_date = twenty4_to_12(input('Due date, if applicable (yyyy-mm-dd hh:mm:ss AM/PM)'))
+      if hard_due_date_bool == '0':
+         due_date = "2363-10-4 12:00:00"
+      else:
+         due_date = input('Due date (yyyy-mm-dd hh:mm:ss AM/PM)')
+         due_date = twenty4_to_12(due_date)
       suggested_date = input('When do you WANT to get it done, realistically? (yyyy-mm-dd hh:mm:ss AM/PM) or "idk yet".\n')
       if suggested_date == "idk yet":
          suggested_date = "2363-10-4 12:00:00 PM"
