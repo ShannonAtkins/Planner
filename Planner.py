@@ -265,7 +265,7 @@ while True:
                      #physical_activity_required, mental_capacity_required, anxiety_level_evoked
       name = input('name:\n')
       hard_due_date_bool = input('Is there a hard due date? Input as bool.\n')
-      due_date = input('Due date, if applicable (yyyymmdd hh:mm:ss AM/PM)')
+      due_date = input('Due date, if applicable (yyyy-mm-dd hh:mm:ss AM/PM)')
       suggested_date = input('When do you WANT to get it done, realistically? (yyyy-mm-dd hh:mm:ss AM/PM) or "idk yet".\n')
       urgency = input('Urgency from 1 to 10\n')
       notes = input('Notes:\n')
