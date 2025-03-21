@@ -7,8 +7,10 @@ import shutil
 #꧁∙·▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫꧁ Top Matter ꧂▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫·∙꧂#
 #꧁∙·▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫▫ᵒᵒ▫▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫·∙꧂#
 
+#  ≈☆≈Read in the passowrd.  Github won't allow you to have password in files even for stupid stuff nobody will ever break into.≈☆≈  #
 with open ('Config.txt') as file:
    password = file.readline()
+
 #  ≈☆≈Connection to SQL≈☆≈  #
 timeout = 10
 connection = pymysql.connect(
@@ -301,6 +303,7 @@ while True:
    elif selection == '5':
       pass
    elif selection == '7':
+      connection.close()
       exit()
    elif selection == '8':
       pass
