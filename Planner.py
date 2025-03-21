@@ -139,7 +139,7 @@ def FetchActivities():
       if row['is_active']:  
          if user == 'Shannon':
             ActivitiesList.append(Activity(row['name'], row['hard_due_date_bool'], row['due_date'], row['suggested_date'], row['urgency'], row['notes'],
-                     row['physical_activity_required'], row['mental_capacity_required'], row['anxiety_level_evoked'], row['under_quest'], ['under_journey']))
+                     row['physical_activity_required'], row['mental_capacity_required'], row['anxiety_level_evoked'], row['under_quest'], row['under_journey']))
 
 #  ≈☆≈ Adds a new Activity into the SQL database ≈☆≈  #
 def AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, under_quest, under_journey):
@@ -212,15 +212,18 @@ def render():
    print('✧ ', end='')
    frog()
 
-   for object in EpicQuestsList:
-      rgb_color = object.color
+   for quest in EpicQuestsList:
+      rgb_color = quest.color
       red = rgb_color[0:3]
       green = rgb_color[3:6]
       blue = rgb_color[6:9]
-      print('\033[38;2;'+ red + ';' + green + ';' + blue + 'm' + object.name)
+      print('\033[38;2;'+ red + ';' + green + ';' + blue + 'm' + quest.name)
       for journey in JourneyList:
-         if journey.under_quest == object.name:
+         if journey.under_quest == quest.name:
             print('  ' + journey.name)
+            for activity in ActivitiesList:
+               if activity.under_journey == journey.name:
+                  print('    ' + activity.name)
 
 #  ≈☆≈ Calculate frog.  What is the frog?  That's a good google search. ≈☆≈  #
 def frog():
