@@ -4,7 +4,10 @@ import shutil
 def twenty4_to_12(dt: str):
    if dt.endswith('AM'):
       return dt.split('AM')[0]
-   hour = int(dt.split(':')[0].split(' ')[-1]) + 12
+   hour = int(dt.split(':')[0].split(' ')[-1])
+   if hour == 12:
+      return dt.split('PM')[0]
+   hour += 12
    return dt.split(':')[0].split(' ')[0] + ' ' + str(hour) + ':' + dt.split(':')[1] + ':' + dt.split(':')[2].split(' ')[0]
 
 #꧁∙·▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫▫ᵒᵒ▫▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫·∙꧂#
@@ -273,7 +276,10 @@ while True:
       name = input('name:\n')
       hard_due_date_bool = input('Is there a hard due date? Input as bool.\n')
       due_date = twenty4_to_12(input('Due date, if applicable (yyyy-mm-dd hh:mm:ss AM/PM)'))
-      suggested_date = twenty4_to_12(input('When do you WANT to get it done, realistically? (yyyy-mm-dd hh:mm:ss AM/PM) or "idk yet".\n'))
+      suggested_date = input('When do you WANT to get it done, realistically? (yyyy-mm-dd hh:mm:ss AM/PM) or "idk yet".\n')
+      if suggested_date == "idk yet":
+         suggested_date = "2363-10-4 12:00:00 PM"
+      suggested_date = twenty4_to_12(suggested_date)
       urgency = input('Urgency from 1 to 10\n')
       notes = input('Notes:\n')
       physical_activity_required = input('Physical activity required from 1-10\n')
