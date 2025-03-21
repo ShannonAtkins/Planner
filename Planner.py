@@ -203,6 +203,7 @@ def render():
    print('\n✧', end='')
    for i in range(screen_size_edges):
       print(' ', end='')
+   print(' ', end='')
    print('✧')
    print('✧ ', end='')
    frog()
