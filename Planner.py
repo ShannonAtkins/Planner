@@ -139,8 +139,8 @@ def FetchActivities():
    cursor.execute('SELECT * FROM Activities')
    result = cursor.fetchall()
    for row in result:
-      if row['is_active']:  
-         if user == 'Shannon':
+      if row['is_active']:
+         if user in row['user'].split(','):
             ActivitiesList.append(Activity(row['name'], row['hard_due_date_bool'], row['due_date'], row['suggested_date'], row['urgency'], row['notes'],
                      row['physical_activity_required'], row['mental_capacity_required'], row['anxiety_level_evoked'], row['under_quest'], row['under_journey']))
 
