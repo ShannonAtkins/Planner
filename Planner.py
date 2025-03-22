@@ -213,7 +213,9 @@ def render():
    print(' ', end='')
    print('✧')
    print('✧ ', end='')
-   frog()
+   Frog()
+
+   Dailies()
 
    for quest in EpicQuestsList:
       rgb_color = quest.color
@@ -229,14 +231,39 @@ def render():
                   print('    ' + activity.name)
 
 #  ≈☆≈ Calculate frog.  What is the frog?  That's a good google search. ≈☆≈  #
-def frog():
+def Frog():
    todays_frog = 'OMG you\'re done'
    highest_burden = 0
    for activity in ActivitiesList:
       burden = activity.anxiety_level_evoked + activity.physical_activity_required + activity.mental_capacity_required
       if burden > highest_burden:
+         highest_burden = burden
          todays_frog = str(activity)
-   print('\033[38;2;100;200;100m Today\'s frog is: ' + todays_frog)
+   print('\033[38;2;100;200;100m Today\'s frog is: ' + todays_frog + '\n')
+
+def Dailies():
+   dailies = []
+   with open(user + '.txt') as file:
+      file.readline()
+      dailies = [string.strip('\n') for string in file.readlines()]
+   morning_list = dailies[:dailies.index('Evening:')]
+   evening_list = dailies[dailies.index('Evening:') + 1 :]
+
+   max_list_width = max(len(string) for string in morning_list) + 5
+
+   print('Morning:'.ljust(max_list_width), 'Evening:')
+
+   if len(morning_list) >= len(evening_list):
+      for i in range(len(evening_list)):
+         print(morning_list[i].ljust(max_list_width), evening_list[i])
+      for i in range(len(evening_list), len(morning_list)):
+         print(morning_list[i])
+   else:
+      for i in range(len(morning_list)):
+         print(morning_list[i].ljust(max_list_width) + evening_list[i])
+      for i in range(len(morning_list), len(evening_list)):
+         print(''.ljust(max_list_width), evening_list[i])
+   
 
 def FetchFetchingFunctions():
    FetchQuests()
