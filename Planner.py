@@ -322,8 +322,8 @@ while True:
    
    elif selection == '5':
       activity_to_retire = input('Which activity?')
-      which_journey = input('Which Journey is this under?')
       which_quest = input('Which Quest is this under?')
+      which_journey = input('Which Journey is this under?')
       cursor.execute('UPDATE Activities SET is_active = false WHERE name = \'' + activity_to_retire + '\' AND under_quest = \'' + which_quest + '\' AND under_journey = \'' + which_journey + '\'')
    elif selection == '7':
       connection.close()
