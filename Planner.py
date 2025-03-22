@@ -261,7 +261,7 @@ while True:
 2. Add repeating Activity
 3. Add Journey
 4. Add Epic Quest
-5. Mark Activity as Complete
+5. Retire Activity
 7. Quit
 8. Options
 9. Retire Journey
@@ -321,7 +321,10 @@ while True:
          AddEpicQuest(name, color, priority)
    
    elif selection == '5':
-      pass
+      activity_to_retire = input('Which activity?')
+      which_journey = input('Which Journey is this under?')
+      which_quest = input('Which Quest is this under?')
+      cursor.execute('UPDATE Activities SET is_active = false WHERE name = \'' + activity_to_retire + '\' AND under_quest = \'' + which_quest + '\' AND under_journey = \'' + which_journey + '\'')
    elif selection == '7':
       connection.close()
       exit()
