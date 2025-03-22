@@ -129,7 +129,7 @@ class Activity:
       self.under_journey = under_journey
 
     def __str__(self):
-       return f''
+       return self.name
 
     def __repr__(self):
        return self.name
@@ -230,7 +230,13 @@ def render():
 
 #  ≈☆≈ Calculate frog.  What is the frog?  That's a good google search. ≈☆≈  #
 def frog():
-   print('\033[38;2;100;200;100m Today\'s frog is:')
+   todays_frog = 'OMG you\'re done'
+   highest_burden = 0
+   for activity in ActivitiesList:
+      burden = activity.anxiety_level_evoked + activity.physical_activity_required + activity.mental_capacity_required
+      if burden > highest_burden:
+         todays_frog = str(activity)
+   print('\033[38;2;100;200;100m Today\'s frog is: ' + todays_frog)
 
 def FetchFetchingFunctions():
    FetchQuests()
