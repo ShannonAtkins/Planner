@@ -1,5 +1,6 @@
 import pymysql
 import shutil
+import datetime
 
 def twenty4_to_12(dt: str):
    if dt.endswith('AM'):
@@ -213,8 +214,9 @@ def render():
    print(' ', end='')
    print('✧')
    print('✧ ', end='')
-   Frog()
 
+   Frog()
+   WhatsNext()
    Dailies()
 
    for quest in EpicQuestsList:
@@ -263,6 +265,23 @@ def Dailies():
          print(morning_list[i].ljust(max_list_width) + evening_list[i])
       for i in range(len(morning_list), len(evening_list)):
          print(''.ljust(max_list_width), evening_list[i])
+
+def WhatsNext():
+   next_hard_date = datetime.datetime(2362,10,4,12,0,0)
+   next_hard_date_activity = ''
+   next_soft_date = datetime.datetime(2362,10,4,12,0,0)
+   next_soft_date_activity = ''
+   for activity in ActivitiesList:
+      if activity.due_date < next_hard_date:
+         next_hard_date_activity = activity
+         next_hard_date = activity.due_date
+      if activity.suggested_date < next_soft_date:
+         next_soft_date_activity = activity
+         next_soft_date = activity.suggested_date
+   print('Next hard due date: ' + next_hard_date_activity.name + '   ' + next_hard_date_activity.due_date.strftime('%Y-%m-%d %I:%M'))
+   print('Next soft due date: ' + next_soft_date_activity.name + '   ' + next_soft_date_activity.suggested_date.strftime('%Y-%m-%d %I:%M') + '\n')
+
+
    
 
 def FetchFetchingFunctions():
@@ -288,16 +307,24 @@ while True:
    RepeatingActivitiesList=[]
 
    render()
+#  ≈☆≈ K.  I know immediately copied code looks bad.  I know that.  But this fixes a glitch in Visual Studio Code's terminal.  It's not on me.  Talk to Microsoft. ≈☆≈  #
+   EpicQuestsList=[]
+   JourneyList=[]
+   ActivitiesList=[]
+   RepeatingActivitiesList=[]
+
+   render()
+
 
    selection = input('''\033[38;2;0;0;0m
-1. Add Activity
-2. Add repeating Activity
-3. Add Journey
-4. Add Epic Quest
-5. Retire Activity
-7. Quit
-8. Options
-9. Retire Journey
+1.  Add Activity
+2.  Add repeating Activity
+3.  Add Journey
+4.  Add Epic Quest
+5.  Retire Activity
+7.  Quit
+8.  Options
+9.  Retire Journey
 10. Retire Quest
 11. Rerender
 ''')
@@ -368,7 +395,7 @@ while True:
    elif selection == '10':
       pass
    elif selection == '11':
-      render()
+      pass
       
 #  ≈☆≈ Commits the changes in the SQL database ≈☆≈  #
    connection.commit()
