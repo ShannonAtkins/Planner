@@ -286,8 +286,6 @@ def WhatsNext():
    print('Next soft due date: ' + next_soft_date_activity.name + '   ' + next_soft_date_activity.suggested_date.strftime('%Y-%m-%d %I:%M') + '\n')
 
 
-   
-
 def FetchFetchingFunctions():
    FetchQuests()
    FetchJournies()
@@ -342,7 +340,7 @@ while True:
       if hard_due_date_bool == '0':
          due_date = "2363-10-4 12:00:00"
       else:
-         due_date = input('Due date (yyyy-mm-dd hh:mm:ss AM/PM)')
+         due_date = input('Due date (yyyy-mm-dd hh:mm:ss AM/PM)\n')
          due_date = twenty4_to_12(due_date)
       suggested_date = input('When do you WANT to get it done, realistically? (yyyy-mm-dd hh:mm:ss AM/PM) or "idk yet".\n')
       if suggested_date == "idk yet":
@@ -385,9 +383,9 @@ while True:
          AddEpicQuest(name, color, priority)
    
    elif selection == '5':
-      activity_to_retire = input('Which activity?')
-      which_quest = input('Which Quest is this under?')
-      which_journey = input('Which Journey is this under?')
+      activity_to_retire = input('Which activity?\n')
+      which_quest = input('Which Quest is this under?\n')
+      which_journey = input('Which Journey is this under?\n')
       cursor.execute('UPDATE Activities SET is_active = false WHERE name = \'' + activity_to_retire + '\' AND under_quest = \'' + which_quest + '\' AND under_journey = \'' + which_journey + '\'')
    elif selection == '7':
       connection.close()
