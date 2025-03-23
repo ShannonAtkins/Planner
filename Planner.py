@@ -203,7 +203,8 @@ def render():
    screen_size_cute = screen_size_cute//5
    screen_size_edges = screen_size[0]-7
 
-   print('\033[38;2;250;220;150m')
+   print('\033[38;2;250;220;150m' + '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+
 
    for i in range(screen_size_cute):
    
@@ -244,6 +245,7 @@ def Frog():
    print('\033[38;2;100;200;100m Today\'s frog is: ' + todays_frog + '\n')
 
 def Dailies():
+   print('\033[38;2;250;190;10m')
    dailies = []
    with open(user + '.txt') as file:
       file.readline()
@@ -265,6 +267,7 @@ def Dailies():
          print(morning_list[i].ljust(max_list_width) + evening_list[i])
       for i in range(len(morning_list), len(evening_list)):
          print(''.ljust(max_list_width), evening_list[i])
+   print()
 
 def WhatsNext():
    next_hard_date = datetime.datetime(2362,10,4,12,0,0)
@@ -278,6 +281,7 @@ def WhatsNext():
       if activity.suggested_date < next_soft_date:
          next_soft_date_activity = activity
          next_soft_date = activity.suggested_date
+   print('\033[38;2;50;0;190m')
    print('Next hard due date: ' + next_hard_date_activity.name + '   ' + next_hard_date_activity.due_date.strftime('%Y-%m-%d %I:%M'))
    print('Next soft due date: ' + next_soft_date_activity.name + '   ' + next_soft_date_activity.suggested_date.strftime('%Y-%m-%d %I:%M') + '\n')
 
