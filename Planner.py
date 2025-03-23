@@ -264,7 +264,7 @@ def Dailies():
          print(morning_list[i])
    else:
       for i in range(len(morning_list)):
-         print(morning_list[i].ljust(max_list_width) + evening_list[i])
+         print(morning_list[i].ljust(max_list_width), evening_list[i])
       for i in range(len(morning_list), len(evening_list)):
          print(''.ljust(max_list_width), evening_list[i])
    print()
