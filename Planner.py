@@ -353,7 +353,7 @@ while True:
       anxiety_level_evoked = input('Anxiety level evoked from 1-10\n')
       under_quest = input('What quest is this under?\n')
       under_journey = input('What journey is this under?\n')
-      who = input('Is this for just you?')
+      who = input('Is this for just you?\n')
       if who == 'no':
          AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes,
                   physical_activity_required, mental_capacity_required, anxiety_level_evoked, 'Shannon,Nathanael', under_quest, under_journey)
