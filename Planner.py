@@ -116,7 +116,7 @@ def AddJourney(name, under_quest, user='Shannon,Nathanael'):
 #  ≈☆≈ Class definition of the lowest level category for organizing activities.  Each journey contains activities. ≈☆≈  #
 class Activity:
     def __init__(self, name, hard_due_date_bool, due_date, suggested_date, urgency, notes,
-                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, under_quest, under_journey):
+                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, under_quest, under_journey, can_be_frog):
       self.name = name
       self.hard_due_date_bool = hard_due_date_bool
       self.due_date = due_date
@@ -128,6 +128,7 @@ class Activity:
       self.anxiety_level_evoked = anxiety_level_evoked
       self.under_quest = under_quest
       self.under_journey = under_journey
+      self.can_be_frog = can_be_frog
 
     def __str__(self):
        return self.name
@@ -143,13 +144,13 @@ def FetchActivities():
       if row['is_active']:
          if user in row['user'].split(','):
             ActivitiesList.append(Activity(row['name'], row['hard_due_date_bool'], row['due_date'], row['suggested_date'], row['urgency'], row['notes'],
-                     row['physical_activity_required'], row['mental_capacity_required'], row['anxiety_level_evoked'], row['under_quest'], row['under_journey']))
+                     row['physical_activity_required'], row['mental_capacity_required'], row['anxiety_level_evoked'], row['under_quest'], row['under_journey'], row['can_be_frog']))
 
 #  ≈☆≈ Adds a new Activity into the SQL database ≈☆≈  #
-def AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, under_quest, under_journey):
-   cursor.execute('INSERT INTO Activities (name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, is_active, under_quest, under_journey) VALUES (\'' 
+def AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, under_quest, under_journey, can_be_frog):
+   cursor.execute('INSERT INTO Activities (name, hard_due_date_bool, due_date, suggested_date, urgency, notes, physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, is_active, under_quest, under_journey, can_be_frog) VALUES (\'' 
                   + name + '\', ' + hard_due_date_bool + ', \'' + due_date + '\', \'' + suggested_date + '\', ' + urgency + ', \'' + notes + '\', ' + physical_activity_required 
-                  + ', ' + mental_capacity_required + ', ' + anxiety_level_evoked + ',\'' + user + '\', true, \'' + under_quest + '\', \'' + under_journey +'\')')
+                  + ', ' + mental_capacity_required + ', ' + anxiety_level_evoked + ',\'' + user + '\', true, \'' + under_quest + '\', \'' + under_journey +'\', ' + can_be_frog + ')')
    connection.commit()
 
 #  ≈☆≈ Class definition of the lowest level category for organizing repeating activities ≈☆≈  #
@@ -239,7 +240,7 @@ def Frog():
    highest_burden = 0
    for activity in ActivitiesList:
       burden = activity.anxiety_level_evoked + activity.physical_activity_required + activity.mental_capacity_required
-      if burden > highest_burden:
+      if burden > highest_burden and activity.can_be_frog:
          highest_burden = burden
          todays_frog = str(activity)
    print('\033[38;2;100;200;100m Today\'s frog is: ' + todays_frog + '\n')
@@ -354,12 +355,13 @@ while True:
       under_quest = input('What quest is this under?\n')
       under_journey = input('What journey is this under?\n')
       who = input('Is this for just you?\n')
+      can_be_frog = input('Can this be a frog? Enter as bool.\n')
       if who == 'no':
          AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes,
-                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, 'Shannon,Nathanael', under_quest, under_journey)
+                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, 'Shannon,Nathanael', under_quest, under_journey, can_be_frog)
       else:
          AddActivity(name, hard_due_date_bool, due_date, suggested_date, urgency, notes,
-                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, under_quest, under_journey)
+                  physical_activity_required, mental_capacity_required, anxiety_level_evoked, user, under_quest, under_journey, can_be_frog)
 
 #  ≈☆≈ When the user chooses to add a repeating activity ≈☆≈  #
 
